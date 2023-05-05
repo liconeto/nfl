@@ -1,9 +1,25 @@
+import ForwardTwoToneIcon from "@mui/icons-material/ForwardTwoTone";
+import axios from "axios";
 import { Inter } from "next/font/google";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [nfl, setNfl] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:3050/conferences")
+      .then((response) => {
+        setNfl(response.data);
+      })
+      .catch((err) => {
+        console.error("Iiiii deu ruim!!!" + err);
+      });
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,6 +28,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        NFL
+        <ul>
+          {nfl.map((afcTeams) => (
+            <li key={afcTeams.id}>
+              {" "}
+              {ForwardTwoToneIcon}
+              {afcTeams.name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
