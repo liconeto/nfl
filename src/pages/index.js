@@ -1,4 +1,4 @@
-import ForwardTwoToneIcon from "@mui/icons-material/ForwardTwoTone";
+import EastIcon from "@mui/icons-material/East";
 import axios from "axios";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -16,7 +16,7 @@ export default function Home() {
         setNfl(response.data);
       })
       .catch((err) => {
-        console.error("Iiiii deu ruim!!!" + err);
+        console.error(`Iiiii deu ruim!!!  ${err}`);
       });
   }, []);
 
@@ -29,13 +29,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        NFL
         <ul>
           {nfl.map((afcTeams) => (
             <li key={afcTeams.id}>
-              {" "}
-              {ForwardTwoToneIcon}
+              <EastIcon />
               {afcTeams.name}
+              <ul>
+                {afcTeams.divisions.map((division) => (
+                  <li key={division.id}>
+                    <EastIcon /> Apelido DIV: {division.alias}
+                    {division.teams.map((team) => (
+                      <li
+                        key={team.id}
+                        style={{
+                          background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
+                        }}
+                      >
+                        <EastIcon />
+                        {team.name}
+                      </li>
+                    ))}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
