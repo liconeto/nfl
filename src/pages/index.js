@@ -11,7 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3050/conferences")
+      .get("http://localhost:3050/conferences")
       .then((response) => {
         setNfl(response.data);
       })

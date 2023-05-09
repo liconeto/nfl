@@ -199,7 +199,29 @@
                                 "id": "859f427c-5157-4b5a-90e4-066e83f46cc3",
                                 "name": "Raiders",
                                 "alias": "LV"
-                            }
+                            },
+                            "team_colors": [
+                                {
+                                    "type": "secondary",
+                                    "hex_color": "#000000",
+                                    "alpha": 0.0,
+                                    "rgb_color": {
+                                        "red": 0,
+                                        "green": 34,
+                                        "blue": 68
+                                    }
+                                },
+                                {
+                                    "type": "primary",
+                                    "hex_color": "#FFFFFF",
+                                    "alpha": 0.0,
+                                    "rgb_color": {
+                                        "red": 251,
+                                        "green": 79,
+                                        "blue": 20
+                                    }
+                                }
+                            ]
                         }
                     ]
                 },
