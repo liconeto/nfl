@@ -20,8 +20,10 @@
 
 .boxTeams{
   margin: 10px;
+  text-align: -webkit-center;
 }
 
 .grid2{
   margin: 3px;
+  
 }

@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <h1>National Football League</h1>
+        <h1>NFL - National Football League</h1>
         <Main />
 
         <NextScript />

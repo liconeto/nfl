@@ -1,10 +1,12 @@
 import EastIcon from "@mui/icons-material/East";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import axios from "axios";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
 const inter = Inter({ subsets: ["latin"] });
@@ -53,13 +55,17 @@ export default function Home() {
                             md={2}
                             key={team.id}
                             style={{
+                              color: "lime",
                               background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
                             }}
                           >
-                            Time:{team.name} <br />
-                            Cidade:{team.venue.city} <br />
-                            Estado:{team.venue.state} <br />
-                            País:{team.venue.country}
+                            <Button href="#" size="large">
+                              <Avatar
+                                src={team.venue.image}
+                                sx={{ width: 66, height: 66 }}
+                              />
+                            </Button>
+                            {team.name}
                           </Grid2>
                         ))}
                       </Grid2>
