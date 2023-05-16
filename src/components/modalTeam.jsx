@@ -35,7 +35,7 @@ function ChildModal() {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{ ...style, width: 200 }}>
+        <Box sx={{ ...style, width: 300 }}>
           <h2 id="child-modal-title">Text in a child modal</h2>
           <p id="child-modal-description">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.

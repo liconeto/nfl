@@ -1,3 +1,4 @@
+import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -5,7 +6,9 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <h1>NFL - National Football League</h1>
+        <h1>
+          <SportsFootballIcon /> NFL - National Football League
+        </h1>
         <Main />
 
         <NextScript />

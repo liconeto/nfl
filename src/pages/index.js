@@ -1,4 +1,5 @@
 import EastIcon from "@mui/icons-material/East";
+import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -6,6 +7,7 @@ import axios from "axios";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import NestedModal from "../components/modalTeam";
 
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
@@ -37,12 +39,13 @@ export default function Home() {
         <ul className="navUl">
           {nfl.map((afcTeams) => (
             <li className="navLi" key={afcTeams.id}>
+              <SportsFootballIcon />
               {afcTeams.name}
               <ul className="navUl">
                 {afcTeams.divisions.map((division) => (
                   <li className="liDiv" key={division.id}>
-                    <EastIcon /> Apelido DIV: {division.alias}
-                    <Box className="boxTeams" sx={{ flexGrow: 1 }}>
+                    <EastIcon /> Divisão: {division.alias}
+                    <Box className="boxTeams" sx={{ flexGrow: 2 }}>
                       <Grid2
                         container
                         spacing={{ xs: 2, md: 4 }}
@@ -59,12 +62,14 @@ export default function Home() {
                               background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
                             }}
                           >
-                            <Button href="#" size="large">
-                              <Avatar
-                                src={team.venue.image}
-                                sx={{ width: 66, height: 66 }}
-                              />
-                            </Button>
+                            <NestedModal>
+                              <Button href="#" size="large">
+                                <Avatar
+                                  src={team.venue.image}
+                                  sx={{ width: 66, height: 66 }}
+                                />
+                              </Button>
+                            </NestedModal>
                             {team.name}
                           </Grid2>
                         ))}
