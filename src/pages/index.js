@@ -3,18 +3,34 @@ import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import NestedModal from "../components/modalTeam";
 
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
-
 const inter = Inter({ subsets: ["latin"] });
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Home() {
   const [nfl, setNfl] = useState([]);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     axios
@@ -45,7 +61,7 @@ export default function Home() {
                 {afcTeams.divisions.map((division) => (
                   <li className="liDiv" key={division.id}>
                     <EastIcon /> Divisão: {division.alias}
-                    <Box className="boxTeams" sx={{ flexGrow: 2 }}>
+                    <Box className="boxTeams" sx={{ flexGrow: 3 }}>
                       <Grid2
                         container
                         spacing={{ xs: 2, md: 4 }}
@@ -62,15 +78,61 @@ export default function Home() {
                               background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
                             }}
                           >
-                            <NestedModal>
-                              <Button href="#" size="large">
-                                <Avatar
-                                  src={team.venue.image}
-                                  sx={{ width: 66, height: 66 }}
-                                />
-                              </Button>
-                            </NestedModal>
-                            {team.name}
+                            <Button onClick={handleOpen}>
+                              <Avatar
+                                src={team.venue.image}
+                                sx={{ width: 66, height: 66 }}
+                              />
+                              {team.name}
+                            </Button>
+                            <Modal
+                              open={open}
+                              onClose={handleClose}
+                              aria-labelledby="modal-modal-title"
+                              aria-describedby="modal-modal-description"
+                              key={team.id}
+                            >
+                              <Box
+                                sx={{
+                                  ...style,
+                                  with: 400,
+                                  background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
+                                }}
+                              >
+                                <Typography
+                                  id="modal-modal-title"
+                                  variant="h6"
+                                  component="h2"
+                                >
+                                  <Avatar
+                                    src={team.venue.image}
+                                    sx={{ width: 66, height: 66 }}
+                                  />
+                                  {team.name}
+                                </Typography>
+                                <Typography
+                                  id="modal-modal-description"
+                                  sx={{ mt: 2 }}
+                                >
+                                  <p>Estádio: {team.venue.name}</p>
+                                  <p>Capacidade: {team.venue.capacity}</p>
+                                  <p>Endereço: {team.venue.address}</p>
+                                  <p>
+                                    Cidade: {team.venue.city} -{" "}
+                                    {team.venue.state}
+                                  </p>
+                                  <p>
+                                    Localização:
+                                    <a
+                                      href={`https://www.google.com/search?q=${team.venue.location.lat},${team.venue.location.lng}`}
+                                    >
+                                      {team.venue.location.lat},
+                                      {team.venue.location.lng}
+                                    </a>
+                                  </p>
+                                </Typography>
+                              </Box>
+                            </Modal>
                           </Grid2>
                         ))}
                       </Grid2>
