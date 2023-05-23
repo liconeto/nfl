@@ -121,6 +121,7 @@ export default function Home() {
                                     Cidade: {team.venue.city} -{" "}
                                     {team.venue.state}
                                   </p>
+                                  n
                                   <p>
                                     Localização:
                                     <a
