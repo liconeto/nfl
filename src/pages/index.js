@@ -30,6 +30,15 @@ const style = {
 export default function Home() {
   const [nfl, setNfl] = useState([]);
 
+  const getTeam = (id) => {
+    nfl.divisions.teams.filter(id);
+  };
+
+  const handleClick = (idTeam) => {
+    handleOpen;
+    getTeam(idTeam);
+  };
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -60,12 +69,7 @@ export default function Home() {
       <div>
         <h1>
           {" "}
-          <Image
-            src={nflLogo}
-            width={50}
-            height={50}
-            alt="Picture of the author"
-          />
+          <Image src={nflLogo} width={50} height={50} alt="Team image" />
           NFL - National Football League <SportsFootballIcon />
         </h1>
       </div>
@@ -96,7 +100,7 @@ export default function Home() {
                               background: `linear-gradient(100deg,${team.team_colors[0].hex_color},${team.team_colors[1].hex_color})`,
                             }}
                           >
-                            <Button onClick={handleOpen}>
+                            <Button onClick={handleClick}>
                               <Avatar
                                 src={team.venue.image}
                                 sx={{ width: 66, height: 66 }}
@@ -134,16 +138,21 @@ export default function Home() {
                                 >
                                   <p>Estádio: {team.venue.name}</p>
                                   <p>Capacidade: {team.venue.capacity}</p>
-                                  <p>Endereço: {team.venue.address}</p>
+                                  <p>Gramado: {team.venue.surface}</p>
+                                  <p>Telhado: {team.venue.roof_type}</p>
+                                  <p>
+                                    Endereço: {team.venue.address} - Zip:{" "}
+                                    {team.venue.zip}
+                                  </p>
                                   <p>
                                     Cidade: {team.venue.city} -{" "}
                                     {team.venue.state}
                                   </p>
-                                  n
                                   <p>
                                     Localização:
                                     <a
                                       href={`https://www.google.com/search?q=${team.venue.location.lat},${team.venue.location.lng}`}
+                                      target="_blank"
                                     >
                                       {team.venue.location.lat},
                                       {team.venue.location.lng}
